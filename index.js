@@ -65,20 +65,23 @@ server.use(express.json())
 let fs = require ('fs')
 let info 
 
-fs.readFile ('koder.json', 'utf8', (error, data) => {
-    if (error) {
-        console.log ('No se pude leer el archivo', error)
-        return 
-    }
-    info = JSON.parse (data)
-    console.log('El contenido es: ', info)
-} )
-
 server.get ('/koders', (request, response) => {
     response.json ({ message: 'Aquí la lista de koders'})
 
-})
+    fs.readFile ('koder.json', 'utf8', (error, data) => {
+        if (error) {
+            console.log ('No se pude leer el archivo', error)
+            return 
+        }
+        
+        response.json(JSON.parse(data))
 
+        console.log('El contenido es: ', data)
+
+        
+    } )
+
+})
 
 server.listen (8080, () => {
     console.log ('Serva listening in port 8080')
