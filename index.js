@@ -63,10 +63,10 @@ const server = express ()
 server.use(express.json())
 
 let fs = require ('fs')
-let info 
+
 
 server.get ('/koders', (request, response) => {
-    response.json ({ message: 'Aquí la lista de koders'})
+    // response.json ({ message: 'Aquí la lista de koders'})
 
     fs.readFile ('koder.json', 'utf8', (error, data) => {
         if (error) {
