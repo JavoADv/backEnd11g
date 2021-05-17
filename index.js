@@ -1,54 +1,3 @@
-// const express = require ('express')
-
-// const server = express ()
-
-// // middleware 
-
-// server.use(express.json())
-
-// server.get ('/hola', (request, response) => {
-//     response.write ('GET /Hola')
-//     response.end ()
-// })
-
-// server.post ('/hola', (request, response) => {
-//     response.write ('Este es un POST a /hola')
-//     response.end()
-// })
-
-// server.get ('/koders', (request, response) => {
-//     // response.setHeader ('Content-Type', 'application/json')
-//     // const json = { message: 'Aquí la lista de koders'}
-//     // const jsonString = JSON.stringify (json)
-
-//     // response.write (jsonString)
-//     // response.end()
-
-//     response.status(401)
-
-//     response.json ({ message: 'Aquí la lista de koders'})
-// })
-
-// server.post ('/koders', (request, response) => {
-//     // response.write ('Aquí puedes crear koders')
-//     // response.end()
-
-//     // const body = request.body
-//     console.log ('body: ', request.body.name) 
-//     response.json ({
-//         message: 'Ok'
-//     })
-// })
-
-// server.put ('/koders', (request, response) => {
-//     response.write ('Aquí puedes sustituir un koder')
-//     response.end()
-// })
-
-
-// server.listen (8080, () => {
-//     console.log ('Serva listening in port 8080')
-// })
 
 /*
 
@@ -56,35 +5,56 @@
 
 */
 
-const express = require ('express')
+// function getKodersFile () {
+//     const content = fs.readFileSync ('koder.json', 'utf8')
+//     return JSON.parse(content)
+// }
 
+const { json } = require('express')
+const express = require ('express')
 const server = express ()
 
+const kodersRouter = require('./routers/koders')
+const mentorsRouter = require ('./routers/mentores')
+
 server.use(express.json())
+server.use('/koders', kodersRouter)
+server.use ('/mentores', mentorsRouter)
 
-let fs = require ('fs')
 
 
-server.get ('/koders', (request, response) => {
-    // response.json ({ message: 'Aquí la lista de koders'})
 
-    fs.readFile ('koder.json', 'utf8', (error, data) => {
-        if (error) {
-            console.log ('No se pude leer el archivo', error)
-            return 
-        }
+
+// Hacer la funcón DELETE
+
+// server.delete ('/koders/:id', (request, response)=> {
+//     const id = parseInt (request.params.id)
+
+//     const content = fs.readFileSync ('koder.json', 'utf8')
+//     const json = JSON.parse(content)
+
+    // const deleteKoder = json.koders.forEach ((koder) => {
         
-        response.json(JSON.parse(data))
+    //     if (id === koders.id) {
+    //         //fs.
+    //     }
 
-        console.log('El contenido es: ', data)
+    // }
 
-        
-    } )
+// })
 
+//GET /koders?gender=f
+
+server.get ('/', (request, response)=> {
+    response.json ({
+        success: true,
+        message: '11G APIv1'
+    })
 })
 
 server.listen (8080, () => {
     console.log ('Serva listening in port 8080')
 })
+
 
 
