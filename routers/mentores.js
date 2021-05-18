@@ -71,9 +71,9 @@ router.patch ('/:id', (request, response) => {
 router.delete ('/:id', (request, response) =>{
     const id = request.params.id 
     const jsonParsed = getMentorsFile()
-    const newMentors = json.mentores.filter ( mentor => mentor.id != id)
+    const newMentors = jsonParsed.mentores.filter ( mentor => mentor.id != id)
 
-    jsonParsed.mentores = newMentores
+    jsonParsed.mentores = newMentors
     
     fs.writeFileSync ('koder.json', JSON.stringify (jsonParsed, null, 2), 'utf8')
 
